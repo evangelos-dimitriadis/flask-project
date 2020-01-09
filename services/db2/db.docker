@@ -1,0 +1,10 @@
+# pull official base image
+FROM monetdb/monetdb:latest
+
+# set work directory
+WORKDIR /var/monetdb5/
+
+# copy project
+COPY . /usr/src/db/
+
+# CMD ["monetdbd", "start", "-n", "/var/monetdb5/dbfarm"]

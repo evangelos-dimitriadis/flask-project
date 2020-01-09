@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+    web:
+        build:
+            context: ./services/web
+            dockerfile: flask.docker
+        #entrypoint: "flask run --host=0.0.0.0"
+        entrypoint: "gunicorn --bind 0.0.0.0:5000 --reload wsgi"
+        #entrypoint: "tail -f /dev/null"
+        networks:
+            - collector-net
+        volumes:
+            - ./services/web/:/usr/src/app/
+        ports:
+            - 5000:5000 
+        restart: unless-stopped
+    
+    db:
+        build:
+            context: ./services/db2
+            dockerfile: db.docker
+        entrypoint: "tail -f /dev/null"
+        volumes:
+            - ./monetdb_data/:/var/monetdb5/dbfarm
+        networks:
+            - collector-net
+        ports:
+            - 50000:50000
+        environment:
+            - MONET_USER=monetdb
+            - MONET_PASSWORD=monetdb
+            - MONET_DB=monetdb
+
+networks:
+  collector-net:
