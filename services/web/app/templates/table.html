@@ -1,0 +1,35 @@
+<!--table that gets data from API endpooint-->
+<table id="%id%" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Start date</th>
+            <th>Office</th>
+            <th>Extn</th>
+        </tr>
+        <tfoot>
+            <tr>
+            </tr>
+        </tfoot>
+    </thead>
+</table>
+<script type="text/javascript">
+$("#id").DataTable( {
+    ajax: {
+        url: '/api/get_workers',
+        dataSrc: ''
+    },
+    columns: [
+        { data: 'name' },
+        { data: 'position' },
+        { data: 'salary' },
+        { data: 'start_date' },
+        { data: 'office' },
+        { data: 'extn' }
+    ]
+} );
+</script>
+
+<h1> lalalala </h1>

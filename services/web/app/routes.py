@@ -17,6 +17,9 @@ def get_benchmarks():
 def about():
     return render_template('about.html', document='Lalalala lalalalla')
 
+@app.route('/table')
+def table():
+    return render_template('table.html')
 
 @app.route('/api/get_workers')
 def get_workers():
@@ -55,4 +58,5 @@ def get_workers():
     }
     ]
     return jsonify(data)
+
 

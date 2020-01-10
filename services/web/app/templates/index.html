@@ -8,121 +8,73 @@
 
 {% block content %}
         
-        <!--title>{{ title }}</title-->
-        <h1>Hello, {{ user.username }}!</h1>
-        <p>
-            <a href="http://jquery.com/">jQuery</a>
-            <!--script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script-->
-            <script type="text/javascript">
-        
-            $( document ).ready(function() {
-        
-                $( "a" ).click(function( event ) {
-            
-                    alert( "As you can see, the link no longer took you to jquery.com" );
-            
-                });
-        
-            });
-            </script>
-        </p>
+<!--title>{{ title }}</title-->
+<h1>Hello, {{ user.username }}!</h1>
+<p>
+    <a href="http://jquery.com/">jQuery</a>
+    <!--script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script-->
+    <script type="text/javascript">
 
-        <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Toggle Table
-        </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <!--table that gets data from API endpooint-->
-            <table id="APITable" class="display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Salary</th>
-                        <th>Start date</th>
-                        <th>Office</th>
-                        <th>Extn</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <!--th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Salary</th>
-                        <th>Start date</th>
-                        <th>Salary</th-->
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        </div>
-        <script type="text/javascript">
-        $('#APITable').DataTable( {
-            ajax: {
-                url: '/api/get_workers',
-                dataSrc: ''
-            },
-            columns: [
-                { data: 'name' },
-                { data: 'position' },
-                { data: 'salary' },
-                { data: 'start_date' },
-                { data: 'office' },
-                { data: 'extn' }
-            ]
-        } );
-        </script>
-        <!--Dynamically generate n tables-->
-        <!--p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Toggle Table
-        </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            
-            <table id="APITable" class="display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Salary</th>
-                        <th>Start date</th>
-                        <th>Office</th>
-                        <th>Extn</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        </div>
-        <script type="text/javascript">
-        $('#APITable').DataTable( {
-            ajax: {
-                url: '/api/get_workers',
-                dataSrc: ''
-            },
-            columns: [
-                { data: 'name' },
-                { data: 'position' },
-                { data: 'salary' },
-                { data: 'start_date' },
-                { data: 'office' },
-                { data: 'extn' }
-            ]
-        } );
-        </script-->
-        <button type="button" id="temp_button">Click me to display Date and Time. </script></button>
-        <h1 id="text"></h1>
-        
-        <h1>Benchmarks</h1>
-        <ul id="Benchmarks"></ul>
+    $( document ).ready(function() {
+
+        $( "a" ).click(function( event ) {
+    
+            alert( "As you can see, the link no longer took you to jquery.com" );
+    
+        });
+
+    });
+    </script>
+</p>
+
+<p>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Toggle Table
+</button>
+
+<div class="collapse" id="collapseExample">
+
+    <!--table that gets data from API endpooint-->
+    <table id="APITable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Start date</th>
+                <th>Office</th>
+                <th>Extn</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script type="text/javascript">
+    $('#APITable').DataTable( {
+        ajax: {
+            url: '/api/get_workers',
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'name' },
+            { data: 'position' },
+            { data: 'salary' },
+            { data: 'start_date' },
+            { data: 'office' },
+            { data: 'extn' }
+        ]
+    } );
+    </script>
+</div>
+</p>
+
+<h2>Benchmarks</h2>
+<div id="edw">
+</div>
+
 {% endblock %}
 
 {% block scripts %}
