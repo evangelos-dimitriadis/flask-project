@@ -1,29 +1,10 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'base.html' %}
 
 {% block head %}
     {{super()}}
     {% include 'libraries.html' %}
 {% endblock %}
 
-      
-{% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('about') }}">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
 
 {% block content %}
         
@@ -53,45 +34,97 @@
         </p>
         <div class="collapse" id="collapseExample">
         <div class="card card-body">
-            <table id="myTable" class="table table-hover">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                </tr>
-            </tbody>
+            <!--table that gets data from API endpooint-->
+            <table id="APITable" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Salary</th>
+                        <th>Start date</th>
+                        <th>Office</th>
+                        <th>Extn</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <!--th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Salary</th>
+                        <th>Start date</th>
+                        <th>Salary</th-->
+                    </tr>
+                </tfoot>
             </table>
         </div>
         </div>
         <script type="text/javascript">
-        $(document).ready( function () {
-            $('#myTable').DataTable();
+        $('#APITable').DataTable( {
+            ajax: {
+                url: '/api/get_workers',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'name' },
+                { data: 'position' },
+                { data: 'salary' },
+                { data: 'start_date' },
+                { data: 'office' },
+                { data: 'extn' }
+            ]
         } );
         </script>
-
+        <!--Dynamically generate n tables-->
+        <!--p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Toggle Table
+        </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            
+            <table id="APITable" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Salary</th>
+                        <th>Start date</th>
+                        <th>Office</th>
+                        <th>Extn</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        </div>
+        <script type="text/javascript">
+        $('#APITable').DataTable( {
+            ajax: {
+                url: '/api/get_workers',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'name' },
+                { data: 'position' },
+                { data: 'salary' },
+                { data: 'start_date' },
+                { data: 'office' },
+                { data: 'extn' }
+            ]
+        } );
+        </script-->
+        <button type="button" id="temp_button">Click me to display Date and Time. </script></button>
+        <h1 id="text"></h1>
+        
+        <h1>Benchmarks</h1>
+        <ul id="Benchmarks"></ul>
 {% endblock %}
 
 {% block scripts %}
-
+<script type="text/javascript" src="static/js/temp.js"></script>
 {% endblock %}

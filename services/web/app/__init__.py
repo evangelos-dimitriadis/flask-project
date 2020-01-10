@@ -14,5 +14,3 @@ app.extensions['bootstrap']['cdns']['jquery'] = WebCDN(
 from app import routes
 
 db_connection = pymonetdb.connect(username="voc", password="voc", hostname="172.19.0.1", database="voc", port="50000")
-
-
