@@ -2,7 +2,7 @@ const get_benchmarks_names = './api/get_benchmarks';
 
 window.onload =  function(){
     createColapseButtons();
-    createTable();
+    //createTable();
 };
 
 function createNode(element) {
@@ -16,6 +16,14 @@ function appendNode(parent, element) {
 function wrapNode(element, wrapper) { // Wrap the given element into another element
     element.parentNode.insertBefore(wrapper, element);
     wrapper.appendChild(element);
+}
+
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(referenceNode.nextSibling, newNode);
+}
+
+function insertBefore(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 console.log(get_benchmarks_names)
@@ -38,6 +46,7 @@ function createColapseButtons() {
                         let button = createNode('button')
                         
                         //Assign different attributes to the element.
+                        button.setAttribute("onclick", "createTable(\""+`${benchmark}`+"\")");
                         button.setAttribute("class", "btn btn-primary");
                         button.setAttribute("type", "button");
                         button.setAttribute("id", `${benchmark}`);
@@ -53,8 +62,8 @@ function createColapseButtons() {
                         div.setAttribute("id", "collapse"+`${benchmark}`);
                         let wrapper = document.getElementById(`${benchmark}`);
                         console.log(wrapper)
-                        appendNode(wrapper, div);
-                        
+                        //appendNode(wrapper, div); // DEN KLEINEI SWSTA TO /BUTTON
+                        insertBefore(wrapper, div)
                         wrapNode(document.getElementById(`${benchmark}`), document.createElement('p'));
 
                 });
@@ -66,18 +75,23 @@ function createColapseButtons() {
     });
 }
 
-function createTable() {
+function createTable(benchmark) {
     $.get("table", function( table_html ) {
         // table_html contains whatever that request returned
-        new_html = table_html.replace("%id%", "new_table")
-        new_html = new_html.replace("#id", "#new_table")
-        let div = document.getElementById("edw");
-        const fragment = document.createRange().createContextualFragment(new_html);
-        console.log(new_html)
-        //div.insertAdjacentHTML('beforeend', table_html);
+        // Check if the table exists already. A datatable cannot be initialized twice.
+        table_id = String(benchmark) + "_table"
+        console.log("benchmark is " + benchmark)
+        if (document.getElementById(table_id){
+            console.log("already there");
+            return
+        }
+        new_html = table_html.replace("%id%", table_id)
+        new_html = new_html.replace("#id", "#" + table_id)
+        let div = document.getElementById("collapse"+`${benchmark}`);
+        let fragment = document.createRange().createContextualFragment(new_html);
         
         div.appendChild(fragment);
 
-        
+
 });
 }
